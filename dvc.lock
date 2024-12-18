@@ -1,0 +1,98 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - path: data/iris.csv
+      hash: md5
+      md5: 013d0da08d6506664ce640459139176b
+      size: 3858
+    - path: src/preprocess.py
+      hash: md5
+      md5: 1f13236c25902f8e50197d5c95210670
+      size: 205
+    outs:
+    - path: data/processed_iris.csv
+      hash: md5
+      md5: 10f5f61b137fa708403ea5c480386bfe
+      size: 2908
+  visualize:
+    cmd: python src/visualize.py
+    deps:
+    - path: data/processed_iris.csv
+      hash: md5
+      md5: 10f5f61b137fa708403ea5c480386bfe
+      size: 2908
+    - path: src/visualize.py
+      hash: md5
+      md5: 2a2c99bbddbbc227573ef2ff7e6cf7d2
+      size: 840
+    outs:
+    - path: plots/correlation_matrix.png
+      hash: md5
+      md5: 80cd14c9ef1068b3cd52b9926c8d66d9
+      size: 45646
+    - path: plots/pairplot.png
+      hash: md5
+      md5: af9ce1a153987234bfa2aa9bc552546c
+      size: 246651
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - path: data/processed_iris.csv
+      hash: md5
+      md5: 10f5f61b137fa708403ea5c480386bfe
+      size: 2908
+    - path: experiments/exp_01/model.pkl
+      hash: md5
+      md5: fae5e68cb159e4894f18533017b1463d
+      size: 14145
+    - path: experiments/exp_02/model.pkl
+      hash: md5
+      md5: 187d1fd0005cb6c41300136454238170
+      size: 89777
+    - path: experiments/exp_03/model.pkl
+      hash: md5
+      md5: 69dabfa57c536941119444bc74f1da71
+      size: 8513
+    - path: src/evaluate.py
+      hash: md5
+      md5: de3658df6fd1cd1b7368db4085a7027b
+      size: 6226
+    outs:
+    - path: experiments/exp_01/feature_importance.png
+      hash: md5
+      md5: 70dd62ec205fb27b26865c610e95c24f
+      size: 18921
+    - path: experiments/exp_01/report.csv
+      hash: md5
+      md5: 5270293385a9bb96eb6e6cead44bf4ef
+      size: 185
+    - path: experiments/exp_01/roc_curves.png
+      hash: md5
+      md5: ec1c26e1f8b076b94fc053ea91330714
+      size: 40798
+    - path: experiments/exp_02/feature_importance.png
+      hash: md5
+      md5: 7c8c247ffed6ebb8a55088736e310cc6
+      size: 18923
+    - path: experiments/exp_02/report.csv
+      hash: md5
+      md5: 5270293385a9bb96eb6e6cead44bf4ef
+      size: 185
+    - path: experiments/exp_02/roc_curves.png
+      hash: md5
+      md5: ec1c26e1f8b076b94fc053ea91330714
+      size: 40798
+    - path: experiments/exp_03/feature_importance.png
+      hash: md5
+      md5: e535a2f58b77c3f95df30ea3d114a9fb
+      size: 19137
+    - path: experiments/exp_03/report.csv
+      hash: md5
+      md5: 5270293385a9bb96eb6e6cead44bf4ef
+      size: 185
+    - path: experiments/exp_03/roc_curves.png
+      hash: md5
+      md5: ec1c26e1f8b076b94fc053ea91330714
+      size: 40798

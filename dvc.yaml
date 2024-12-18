@@ -1,0 +1,36 @@
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - data/iris.csv
+    - src/preprocess.py
+    outs:
+    - data/processed_iris.csv
+
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - data/processed_iris.csv
+    - src/evaluate.py
+    - experiments/exp_01/model.pkl
+    - experiments/exp_02/model.pkl
+    - experiments/exp_03/model.pkl
+    outs:
+    - experiments/exp_01/report.csv
+    - experiments/exp_01/roc_curves.png
+    - experiments/exp_01/feature_importance.png
+    - experiments/exp_02/report.csv
+    - experiments/exp_02/roc_curves.png
+    - experiments/exp_02/feature_importance.png
+    - experiments/exp_03/report.csv
+    - experiments/exp_03/roc_curves.png
+    - experiments/exp_03/feature_importance.png
+
+  visualize:
+    cmd: python src/visualize.py
+    deps:
+    - data/processed_iris.csv
+    - src/visualize.py
+    outs:
+    - plots/correlation_matrix.png
+    - plots/pairplot.png
